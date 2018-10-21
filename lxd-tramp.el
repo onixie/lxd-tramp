@@ -69,15 +69,15 @@
 
 (defun lxd-tramp--running-containers ()
   "Collect running container names."
-  (rest
+  (cl-rest
    (cl-loop for line in (ignore-errors (process-lines lxd-tramp-lxc-executable "list" "--columns=n")) ; Note: --format=csv only exists after version 2.13
             for count from 1
-            when (evenp count) collect (string-trim (substring line 1 -1)))))
+            when (cl-evenp count) collect (string-trim (substring line 1 -1)))))
 
 (defun lxd-tramp--parse-running-containers (&optional ignored)
   "Return a list of (user host) tuples.
 
-TRAMP calls this function with a filename which is IGNORED. The
+TRAMP calls this function with a filename which is IGNORED.  The
 user is an empty string because the lxd TRAMP method uses bash
 to connect to the default user containers."
   (cl-loop for name in (lxd-tramp--running-containers)
