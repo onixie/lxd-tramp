@@ -89,7 +89,7 @@ to connect to the default user containers."
   (add-to-list 'tramp-methods
                `(,lxd-tramp-method
                  (tramp-login-program ,lxd-tramp-lxc-executable)
-                 (tramp-login-args (("exec") ("%h") ("--") ("sh")))
+                 (tramp-login-args (("exec") ("%h") ("--") ("su - %u")))
                  (tramp-remote-shell "/bin/sh")
                  (tramp-remote-shell-args ("-i" "-c")))))
 
